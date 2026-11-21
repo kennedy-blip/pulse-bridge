@@ -25,7 +25,7 @@ Live received frames are queued in IndexedDB. Mesh Command Admin can opt into re
 
 Run **Build Android APK and web bundle** in GitHub Actions. The workflow generates the Capacitor Android project, adds media permissions, assembles a debug-signed APK, generates its SHA-256 manifest, and uploads both the APK and the rebuilt Vite output containing `/releases/pulsebridge-release.apk`. Use a persistent signing key for a production or upgradable sideload release.
 
-To serve the APK with Vercel, place the two files from the `pulsebridge-android` artifact in `public/releases/` before running the Vercel build, or deploy the already built web artifact through your static deployment pipeline. A normal Git-only Vercel build serves the web app but does not contain an APK; the download center reports this rather than downloading a placeholder. Neither a hosted deployment nor a signed production APK is created by this checkout.
+The web build serves the verified debug APK and its SHA-256 manifest from `public/releases/`. To refresh the download, replace both files together using the `pulsebridge-android` artifact from a successful workflow run. The Android build excludes the previously published APK from its bundled web assets.
 
 ## Verification limits
 

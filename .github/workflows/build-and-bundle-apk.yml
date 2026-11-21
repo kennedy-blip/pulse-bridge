@@ -22,6 +22,8 @@ jobs:
           distribution: temurin
           java-version: 21
       - run: $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager 'platforms;android-35' 'build-tools;35.0.0'
+      - name: Exclude the published APK from native app assets
+        run: rm -f public/releases/pulsebridge-release.apk public/releases/pulsebridge-release.json
       - run: npm ci && npm test && npm run build
       - run: npx cap add android
       - name: Add Android media permissions and sync
